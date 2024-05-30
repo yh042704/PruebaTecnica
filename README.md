@@ -6,11 +6,11 @@ configuración de los porcentajes de pagos mínimos e intereses
 bonificables.
 
 ![A screenshot of a computer Description automatically
-generated](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image1.png){width="6.126111111111111in"
+generated](image1.png){width="6.126111111111111in"
 height="1.5582141294838145in"}
 
 ![A screenshot of a computer Description automatically
-generated](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image2.png){width="4.08873687664042in"
+generated](image2.png){width="4.08873687664042in"
 height="2.2177744969378828in"}
 
 **Pantalla Principal**
