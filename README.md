@@ -6,12 +6,10 @@ configuración de los porcentajes de pagos mínimos e intereses
 bonificables.
 
 ![A screenshot of a computer Description automatically
-generated](image1.png){width="6.126111111111111in"
-height="1.5582141294838145in"}
+generated](image1.png)
 
 ![A screenshot of a computer Description automatically
-generated](image2.png){width="4.08873687664042in"
-height="2.2177744969378828in"}
+generated](image2.png)
 
 **Pantalla Principal**
 
@@ -19,14 +17,11 @@ Muestra el menú principal y la opción para que el usuario ingrese con
 sus credenciales además sino las posee permite registrarse.
 
 ![A hand touching a cell phone Description automatically
-generated](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image3.png){width="6.1375in"
-height="2.8131944444444446in"}
+generated](image3.png)
 
-![](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image4.png){width="3.7569444444444446in"
-height="3.0881944444444445in"}
+![](image4.png)
 
-![](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image5.png){width="2.6439391951006126in"
-height="3.4262325021872266in"}
+![](image5.png)
 
 ![A close up of a phone Description automatically
 generated](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image6.png){width="6.145459317585302in"
