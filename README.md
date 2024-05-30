@@ -5,6 +5,10 @@ configura las tarjetas de crédito a cada usuario, además, la
 configuración de los porcentajes de pagos mínimos e intereses
 bonificables.
 
+**SCRIPT DE LA BASE DE DATOS**
+
+PruebaTecnica.SQL/PruebaTecnicaScriptDB.sql
+
 ![A screenshot of a computer Description automatically
 generated](image1.png)
 
