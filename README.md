@@ -6,6 +6,7 @@ configuración de los porcentajes de pagos mínimos e intereses
 bonificables.
 
 **SCRIPT DE LA BASE DE DATOS**
+
 PruebaTecnica.SQL/PruebaTecnicaScriptDB.sql
 
 ![A screenshot of a computer Description automatically
