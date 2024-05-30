@@ -24,8 +24,7 @@ generated](image3.png)
 ![](image5.png)
 
 ![A close up of a phone Description automatically
-generated](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image6.png){width="6.145459317585302in"
-height="0.9122922134733158in"}
+generated](image6.png)
 
 **Pantalla de Contactanos**
 
@@ -34,27 +33,20 @@ sugerencias, ya sea para puntos de mejoras en la aplicación o para
 reportar errores.
 
 ![A screenshot of a chat Description automatically
-generated](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image7.png){width="4.477093175853018in"
-height="3.7937270341207348in"}
+generated](image7.png)
 
 ![A screenshot of a computer Description automatically
-generated](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image8.png){width="5.4542104111986in"
-height="2.8881758530183728in"}
+generated](image8.png)
 
 **Pantalla: Acerca de Nosotros**
 
-![](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image9.png){width="5.67840113735783in"
-height="2.591839457567804in"}
+![](image9.png)
 
 **Pantalla Realizar Compra**
 
-![](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image10.png){width="3.425in"
-height="2.5833333333333335in"}![](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image11.png){width="2.7803029308836393in"
-height="2.9602055993000875in"}
+![](image10.png)![](image11.png)
 
-![](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image12.png){width="2.765152012248469in"
-height="2.831385608048994in"}![](vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d/media/image13.png){width="2.5179855643044617in"
-height="2.587933070866142in"}
+![](image12.png)![](image13.png)
 
 **Pantalla Realizar Pagos**
 
