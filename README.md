@@ -9,6 +9,10 @@ bonificables.
 
 PruebaTecnica.SQL/PruebaTecnicaScriptDB.sql
 
+**Collection POSTMAN**
+
+PruebaTecnica.SQL/PruebaTecnica.postman_collection.json
+
 ![A screenshot of a computer Description automatically
 generated](image1.png)
 
