@@ -5,6 +5,13 @@ configura las tarjetas de crédito a cada usuario, además, la
 configuración de los porcentajes de pagos mínimos e intereses
 bonificables.
 
+
+![A screenshot of a computer Description automatically
+generated](image1.png)
+
+![A screenshot of a computer Description automatically
+generated](image2.png)
+
 **SCRIPT DE LA BASE DE DATOS**
 
 PruebaTecnica.SQL/PruebaTecnicaScriptDB.sql
@@ -12,12 +19,6 @@ PruebaTecnica.SQL/PruebaTecnicaScriptDB.sql
 **Collection POSTMAN**
 
 PruebaTecnica.SQL/PruebaTecnica.postman_collection.json
-
-![A screenshot of a computer Description automatically
-generated](image1.png)
-
-![A screenshot of a computer Description automatically
-generated](image2.png)
 
 **Pantalla Principal**
 
