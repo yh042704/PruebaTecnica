@@ -15,6 +15,39 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaTecnica.Infrastructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaTecnica.SQL", "PruebaTecnica.SQL\PruebaTecnica.SQL.csproj", "{D6D0D46A-651B-45EA-8D0B-9458ACE68FEF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d", "vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d", "{B61BC343-7D3B-40E7-B4BC-09BA1D350D96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{BE94C0E5-FB35-4DC0-BE91-5FD5C5A4FF4E}"
+	ProjectSection(SolutionItems) = preProject
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image1.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image1.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image10.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image10.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image11.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image11.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image12.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image12.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image13.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image13.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image14.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image14.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image15.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image15.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image16.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image16.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image17.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image17.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image18.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image18.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image19.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image19.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image2.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image2.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image20.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image20.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image21.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image21.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image22.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image22.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image23.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image23.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image24.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image24.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image25.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image25.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image26.jpeg = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image26.jpeg
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image27.emf = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image27.emf
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image3.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image3.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image4.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image4.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image5.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image5.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image6.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image6.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image7.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image7.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image8.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image8.png
+		E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image9.png = E:\Onedrive\OneDrive - mail.utec.edu.sv\Proyecto Prueba Tecnica\vertopal_0c9b3d4b6d5b42238ab4acbf82bcf48d\media\image9.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +81,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE94C0E5-FB35-4DC0-BE91-5FD5C5A4FF4E} = {B61BC343-7D3B-40E7-B4BC-09BA1D350D96}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22F25FAB-44D3-4506-A66F-A6FA5ECF1A8A}
