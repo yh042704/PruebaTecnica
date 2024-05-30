@@ -12,17 +12,22 @@ generated](image1.png)
 ![A screenshot of a computer Description automatically
 generated](image2.png)
 
+
 **SCRIPT DE LA BASE DE DATOS**
 
 PruebaTecnica.SQL/PruebaTecnicaScriptDB.sql
+
 
 **Collection POSTMAN**
 
 PruebaTecnica.SQL/PruebaTecnica.postman_collection.json
 
+
 **Credenciales**
 Usuario: yesenia@pruebatecnica.com.sv contraseña: 123
+
 Usuario: admin@pruebatecnica.com.sv contraseña: 123
+
 
 **Pantalla Principal**
 
