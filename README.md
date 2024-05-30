@@ -81,4 +81,4 @@ generated](image25.png)
 
 Diagrama Entidad-Relación
 
-![](image27.emf)
+![](DiagramaER.png)
