@@ -20,6 +20,10 @@ PruebaTecnica.SQL/PruebaTecnicaScriptDB.sql
 
 PruebaTecnica.SQL/PruebaTecnica.postman_collection.json
 
+**Credenciales**
+Usuario: yesenia@pruebatecnica.com.sv contraseña: 123
+Usuario: admin@pruebatecnica.com.sv contraseña: 123
+
 **Pantalla Principal**
 
 Muestra el menú principal y la opción para que el usuario ingrese con
