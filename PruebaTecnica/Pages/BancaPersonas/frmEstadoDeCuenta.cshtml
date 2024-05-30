@@ -1,0 +1,389 @@
+﻿@page
+@model PruebaTecnica.Pages.BancaPersonas.frmEstadoDeCuentaModel
+@{
+    ViewBag.Title = "Estado de Cuenta";
+    Layout = "_LayoutDetail";
+}
+
+@section scripts {
+    <script type="text/javascript">
+        init();
+
+        function init() {
+            let d = new Date();
+            let periodo = window.EasyUI("#txtPeriodo");
+            let mes = window.EasyUI("#txtMes");
+
+            periodo.datepicker({
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                language: 'es'
+            }).on('changeDate', (e) => {
+                window.EasyUI(this).datepicker('hide');
+            });
+
+            mes.datepicker({
+                format: "MM",
+                viewMode: "months",
+                minViewMode: "months",
+                language: 'es'
+            }).on('changeDate', (e) => {
+                window.EasyUI(this).datepicker('hide');
+            });
+
+            periodo.datepicker('setDate', d);
+            mes.datepicker('setDate', d);
+
+            window.EasyUI('.easyui-combogrid').combogrid();
+            window.EasyUI('.easyui-combobox').combobox();
+            window.EasyUI('.easyui-linkbutton').linkbutton();
+        }
+
+        function searchEstadoDeCuenta() {
+            let formulario = $('#frmCriterios');
+            let parametros = commonData.GetSerializeObj(formulario);
+
+            let mes = window.EasyUI("#txtMes").datepicker('getDate').getMonth() + 1;
+            parametros.Mes = mes;
+
+            commonData.GetData('/Transacciones/GetEstadoCuenta', parametros)
+                .then((json) => {
+                    let divEstadoCuenta = $('#dEstadoCuenta');
+
+                    if (json.result.EstadoCuentaEnc.length > 0) {
+                        let encabezado = window.LoadTemplate('#EstadoCuentaEnc', json.result.EstadoCuentaEnc)
+                        let detalle = window.LoadTemplate('#EstadoCuentaDetail', json.result.EstadoCuentaDetalle)
+                        let pie = window.LoadTemplate('#EstadoCuentaPie', json.result.EstadoCuentaEnc)
+
+                        const allPromises = Promise.all([encabezado, detalle, pie]);
+                        allPromises.then((values) => {
+                            divEstadoCuenta.html(values[0] + values[1] + values[2]);
+                        }).catch((error) => {
+                            Mensajes.error("Error", error.message);
+                        })
+                    } else {
+                        divEstadoCuenta.html('');
+                    }
+                })
+                .catch((error) => {
+                    Mensajes.error("Error", error.message);
+                });
+        }
+    </script>
+
+    <script id="EstadoCuentaEnc" type="text/x-jsrender">
+        <table class="ck-table-resized" style="border-collapse:collapse;" border="0" cellpadding="0" cellspacing="0" width="80%">
+            <colgroup>
+                <col style="width:9.93%;" width="72">
+                <col style="width:10.48%;" width="76">
+                <col style="width:8.09%;" width="58">
+                <col style="width:5.88%;" width="43">
+                <col style="width:10.11%;" width="73">
+                <col style="width:7.35%;" width="54">
+                <col style="width:9.01%;" width="66">
+                <col style="width:2.57%;" width="19">
+                <col style="width:10.48%;" width="76">
+                <col style="width:2.57%;" width="19">
+                <col style="width:10.48%;" width="76">
+                <col style="width:2.57%;" width="19">
+                <col style="width:10.48%;" width="76">
+            </colgroup>
+            <tbody>
+                <tr style="height:30.0pt;" height="40">
+                    <td class="xl66" style="font-style:normal;font-weight:400;height:30.0pt;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;width:187pt;" colspan="4" height="40" width="249"><a name="RANGE!A1:M22"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:24pt;">Banco Atlántida</span></a></td>
+                    <td class="xl67" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;width:55pt;" width="73"><span style="color:rgb(178, 178, 178);font-family:Arial, sans-serif;font-size:12pt;"></span></td>
+                    <td class="xl68" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;width:40pt;" width="54"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:24pt;"></span></td>
+                    <td class="xl68" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;width:49pt;" width="66"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:24pt;"></span></td>
+                    <td class="xl68" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;width:14pt;" width="19"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:24pt;"></span></td>
+                    <td class="xl68" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;width:57pt;" width="76"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:24pt;"></span></td>
+                    <td class="xl68" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;width:14pt;" width="19"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:24pt;"></span></td>
+                    <td class="xl127" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:right;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;width:128pt;" colspan="3" width="171"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:24pt;"><strong>Estado de Cuenta</strong></span></td>
+                </tr>
+                <tr style="height:7.5pt;" height="10">
+                    <td class="xl69" style="font-style:normal;font-weight:400;height:7.5pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" height="10"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:12pt;"></span></td>
+                    <td class="xl70" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:rgb(178, 178, 178);font-family:Arial, sans-serif;font-size:12pt;"></span></td>
+                    <td class="xl70" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:rgb(178, 178, 178);font-family:Arial, sans-serif;font-size:12pt;"></span></td>
+                    <td class="xl70" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:rgb(178, 178, 178);font-family:Arial, sans-serif;font-size:12pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                </tr>
+                <tr style="height:18.0pt;" height="24">
+                    <td class="xl71" style="font-style:normal;font-weight:400;height:18.0pt;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" height="24"><span style="color:rgb(178, 178, 178);font-family:Arial, sans-serif;font-size:7.5pt;"></span></td>
+                    <td class="xl71" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:rgb(178, 178, 178);font-family:Arial, sans-serif;font-size:7.5pt;"></span></td>
+                    <td class="xl71" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:rgb(178, 178, 178);font-family:Arial, sans-serif;font-size:7.5pt;"></span></td>
+                    <td class="xl71" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:rgb(178, 178, 178);font-family:Arial, sans-serif;font-size:7.5pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl91" style="font-style:normal;font-weight:400;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="2"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:10pt;">Fecha:</span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl131" style="border-bottom-color:rgb(178, 178, 178);border-bottom-width:0.5pt;border-left-color:rgb(178, 178, 178);border-left-width:0.5pt;border-right-color:#B2B2B2;border-right-width:.5pt;border-style:solid;border-top-color:rgb(178, 178, 178);border-top-width:0.5pt;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="3"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;">{{:FechaIni}}</span></td>
+                </tr>
+                <tr style="height:18.0pt;" height="24">
+                    <td class="xl72" style="font-style:normal;font-weight:400;height:18.0pt;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" height="24"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl91" style="font-style:normal;font-weight:400;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="2"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:10pt;">Saldo Tarjeta:</span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl134" style="border-bottom-color:rgb(178, 178, 178);border-bottom-width:0.5pt;border-left-color:rgb(178, 178, 178);border-left-width:0.5pt;border-right-color:#B2B2B2;border-right-width:.5pt;border-style:solid;border-top-color:rgb(178, 178, 178);border-top-width:0.5pt;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="3"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"><b>{{:saldoDisponible}}</b></span></td>
+                </tr>
+                <tr style="height:18.0pt;" height="24">
+                    <td class="xl73" style="font-style:normal;font-weight:400;height:18.0pt;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" height="24"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl73" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl73" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl73" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl91" style="font-style:normal;font-weight:400;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="2"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:10pt;">Limite Tarjeta:</span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl134" style="border-bottom-color:rgb(178, 178, 178);border-bottom-width:0.5pt;border-left-color:rgb(178, 178, 178);border-left-width:0.5pt;border-right-color:#B2B2B2;border-right-width:.5pt;border-style:solid;border-top-color:rgb(178, 178, 178);border-top-width:0.5pt;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="3"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"><b>{{:limiteCredito}}</b></span></td>
+                </tr>
+                <tr style="height:7.5pt;" height="10">
+                    <td class="xl74" style="font-style:normal;font-weight:400;height:7.5pt;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;" height="10"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl74" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl74" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl74" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl75" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl75" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl75" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                </tr>
+                <tr style="height:18.0pt;" height="24">
+                    <td class="xl120" style="background-color:#d9272e;font-style:normal;height:18.0pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4" height="24"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"><strong>Facturado A:</strong></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl120" style="background-color:#d9272e;font-style:normal;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="6"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"><strong>Resumen</strong><span><strong>&nbsp;</strong></span></span></td>
+                </tr>
+                <tr style="height:13.2pt;" height="18">
+                    <td class="xl121" style="font-style:normal;font-weight:400;height:13.2pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4" height="18"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">{{:nombreUsuario}}</span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl105" style="font-style:normal;font-weight:400;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="3"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">Balance Anterior</span></td>
+                    <td class="xl84" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl88" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">$<span>&nbsp;</span></span></td>
+                    <td class="xl103" style="font-style: normal; font-weight: 400; padding-left: 1px; padding-right: 1px; padding-top: 1px; text-decoration-line: none; text-wrap: nowrap; vertical-align: middle; white-space-collapse: collapse; text-align: center;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">{{:montoBalanceAnterior}}&nbsp;</span></td>
+                </tr>
+                <tr style="height:13.2pt;" height="18">
+                    <td class="xl121" style="font-style:normal;font-weight:400;height:13.2pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4" height="18"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">{{:direccion}}</span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl105" style="font-style:normal;font-weight:400;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="2"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">Pagos</span></td>
+                    <td class="xl85" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+                    <td class="xl84" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl88" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">$<span>&nbsp;</span></span></td>
+                    <td class="xl104" style="font-style: normal; font-weight: 400; padding-left: 1px; padding-right: 1px; padding-top: 1px; text-align: left; text-decoration-line: none; text-wrap: nowrap; vertical-align: middle; white-space-collapse: collapse; text-align: center;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">{{:montoPagos}}&nbsp;</span></td>
+                </tr>
+                <tr style="height:13.2pt;" height="18">
+                    <td class="xl72" style="font-style:normal;font-weight:400;height:13.2pt;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" height="18"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl105" style="font-style:normal;font-weight:400;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="2"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">Compras<span>&nbsp;</span></span></td>
+                    <td class="xl85" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+                    <td class="xl84" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl88" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">$<span>&nbsp;</span></span></td>
+                    <td class="xl104" style="font-style: normal; font-weight: 400; padding-left: 1px; padding-right: 1px; padding-top: 1px; text-align: left; text-decoration-line: none; text-wrap: nowrap; vertical-align: middle; white-space-collapse: collapse; text-align: center;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">{{:montoCompras}}&nbsp;</span></td>
+                </tr>
+                <tr style="height:13.2pt;" height="18">
+                    <td class="xl121" style="font-style:normal;font-weight:400;height:13.2pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4" height="18"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl106" style="font-style:normal;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"><strong>Intereses Bonificables</strong></span></td>
+                    <td class="xl89" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"><strong>$</strong><span><strong>&nbsp;</strong></span></span></td>
+                    <td class="xl90" style="font-style: normal; padding-left: 1px; padding-right: 1px; padding-top: 1px; text-decoration-line: none; text-wrap: nowrap; vertical-align: middle; white-space-collapse: collapse; text-align: center;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"><strong>{{:interesesBonificables}}&nbsp;</strong></span></td>
+                </tr>
+
+                <tr style="height:13.2pt;" height="18">
+                    <td class="xl121" style="font-style:normal;font-weight:400;height:13.2pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4" height="18"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl106" style="font-style:normal;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"><strong>Total</strong></span></td>
+                    <td class="xl89" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"><strong>$</strong><span><strong>&nbsp;</strong></span></span></td>
+                    <td class="xl90" style="font-style: normal; padding-left: 1px; padding-right: 1px; padding-top: 1px; text-decoration-line: none; text-wrap: nowrap; vertical-align: middle; white-space-collapse: collapse; text-align: center;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"><strong>{{:SaldoTotal}}&nbsp;</strong></span></td>
+                </tr>
+                <tr style="height:13.2pt;" height="18">
+                    <td class="xl121" style="font-style:normal;font-weight:400;height:13.2pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4" height="18"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl106" style="font-style:normal;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"><strong>Pago Mínimo</strong></span></td>
+                    <td class="xl89" style="font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"><strong>$</strong><span><strong>&nbsp;</strong></span></span></td>
+                    <td class="xl90" style="font-style: normal; padding-left: 1px; padding-right: 1px; padding-top: 1px; text-decoration-line: none; text-wrap: nowrap; vertical-align: middle; white-space-collapse: collapse; text-align: center;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"><strong>{{:pagoMinimo}}&nbsp;</strong></span></td>
+                </tr>
+                <tr style="height:13.2pt;" height="18">
+                    <td class="xl121" style="font-style:normal;font-weight:400;height:13.2pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4" height="18"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl72" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td class="xl107" style="border-bottom-style:none;border-left-style:none;border-right-style:none;border-top:0.5pt solid rgb(178, 178, 178);font-style:normal;font-weight:400;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="4"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;">Fecha Último día Pago</span></td>
+                    <td class="xl129" style="border-bottom-color:rgb(178, 178, 178);border-bottom-width:0.5pt;border-left-color:rgb(178, 178, 178);border-left-width:0.5pt;border-right-color:#B2B2B2;border-right-width:.5pt;border-style:solid;border-top-color:rgb(178, 178, 178);border-top-width:0.5pt;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:right;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="2"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;">{{:FechaPago}}</span></td>
+                </tr>
+                <tr style="height:7.5pt;" height="10">
+                    <td class="xl75" style="font-style:normal;font-weight:400;height:7.5pt;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;" height="10"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl75" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl75" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td class="xl75" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                    <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+                </tr>
+                <tr style="height:18.0pt;" height="24">
+                    <td class="xl92" style="background-color:#d9272e;border-bottom-style:none;border-left:0.5pt solid rgb(178, 178, 178);border-right:0.5pt solid rgb(178, 178, 178);border-top:0.5pt solid rgb(178, 178, 178);font-style:normal;height:18.0pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" height="24"><span style="color:white;font-family:Arial, sans-serif;font-size:9pt;"><strong>Fecha</strong></span></td>
+                    <td class="xl124" style="background-color:#d9272e;border-bottom-style:none;border-left:0.5pt none rgb(178, 178, 178);border-right:.5pt solid #B2B2B2;border-top:0.5pt solid rgb(178, 178, 178);font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="8"><span style="color:white;font-family:Arial, sans-serif;font-size:9pt;"><strong>Descripción</strong></span></td>
+                    <td class="xl128" style="background-color:#d9272e;border-bottom-style:none;border-left:0.5pt none rgb(178, 178, 178);border-right:0.5pt solid rgb(178, 178, 178);border-top:0.5pt solid rgb(178, 178, 178);font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="2"><span style="color:white;font-family:Arial, sans-serif;font-size:9pt;"><strong>Cargos</strong></span></td>
+                    <td class="xl128" style="background-color:#d9272e;border-bottom-style:none;border-left:0.5pt none rgb(178, 178, 178);border-right:0.5pt solid rgb(178, 178, 178);border-top:0.5pt solid rgb(178, 178, 178);font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" colspan="2"><span style="color:white;font-family:Arial, sans-serif;font-size:9pt;"><strong>Abonos</strong></span></td>
+                </tr>
+                <tr style="height:18.0pt;" height="24">
+                    <td class="xl93" style="background-color:#E6E6E6;border-bottom-style:none;border-left:.5pt solid #B2B2B2;border-right:.5pt solid #B2B2B2;border-top-style:none;font-style:normal;font-weight:400;height:18.0pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" height="24"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8.0pt;"></span></td>
+                    <td class="xl115" style="background-color:#E6E6E6;border-bottom-style:none;border-left:.5pt solid #B2B2B2;border-right-style:none;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:348pt;" colspan="8" width="465"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8.0pt;">Balance Anterior</span></td>
+                    <td class="xl97" style="background-color:#E6E6E6;border-bottom-style:none;border-left:.5pt solid #B2B2B2;border-right-style:none;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:14pt;" width="19"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9.0pt;"></span></td>
+                    <td class="xl98" style="background-color:#E6E6E6;border-bottom-style:none;border-left-style:none;border-right:.5pt solid #B2B2B2;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9.0pt;"></span></td>
+                    <td class="xl102" style="background-color:#E6E6E6;border-bottom:.5pt solid #B2B2B2;border-left:.5pt solid #B2B2B2;border-right-style:none;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9.0pt;">$<span>&nbsp;</span></span></td>
+                    <td class="xl96" style="background-color:#E6E6E6;border-bottom:.5pt solid #B2B2B2;border-left-style:none;border-right:.5pt solid #B2B2B2;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9.0pt;">{{:montoBalanceAnterior}}&nbsp;</span></td>
+                </tr>
+    </script>
+
+    <script id="EstadoCuentaDetail" type="text/x-jsrender">
+        <tr style="height:18.0pt;" height="24">
+            <td class="xl94" style="border-bottom:.5pt solid #B2B2B2;border-left:.5pt solid #B2B2B2;border-right:.5pt solid #B2B2B2;border-top-style:none;font-style:normal;font-weight:400;height:18.0pt;padding-left:15px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" height="24"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8.0pt;">{{:fecha}}</span></td>
+            <td class="xl117" style="border-bottom:.5pt solid #B2B2B2;border-left:.5pt solid #B2B2B2;border-right-style:none;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:348pt;" colspan="8" width="465"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9.0pt;">{{:descripcion}}</span></td>
+            <td class="xl100" style="border-bottom:.5pt solid #B2B2B2;border-left:.5pt solid #B2B2B2;border-right-style:none;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:14pt;" width="19"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9.0pt;">{^{if montoCompra !== null}}${{/if}}</span></td>
+            <td class="xl101" style="border-bottom:.5pt solid #B2B2B2;border-left-style:none;border-right:.5pt solid #B2B2B2;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9.0pt;">{{:montoCompra}}</span></td>
+            <td class="xl102" style="border-bottom:.5pt solid #B2B2B2;border-left:.5pt solid #B2B2B2;border-right-style:none;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9.0pt;">{^{if montoPagos !== null}}${{/if}}</span></td>
+            <td class="xl96" style="border-bottom:.5pt solid #B2B2B2;border-left-style:none;border-right:.5pt solid #B2B2B2;border-top-style:none;font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-decoration:none;text-line-through:none;text-underline-style:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9.0pt;">{{:montoPagos}}</span></td>
+        </tr>
+    </script>
+
+    <script id="EstadoCuentaPie" type="text/x-jsrender">
+        <tr style="height:7.5pt;" height="10">
+            <td class="xl77" style="font-style:normal;font-weight:400;height:7.5pt;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;" height="10"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl78" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:57pt;" width="76"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl78" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:44pt;" width="58"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl78" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:32pt;" width="43"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl78" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:55pt;" width="73"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl78" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:40pt;" width="54"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl78" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:49pt;" width="66"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl78" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:14pt;" width="19"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl79" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:57pt;" width="76"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl79" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:wrap;vertical-align:middle;white-space-collapse:collapse;width:14pt;" width="19"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl80" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl80" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+            <td class="xl65" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:9pt;"></span></td>
+        </tr>
+        <tr style="height:18.0pt;" height="24">
+            <td class="xl111" style="background-color:#d9272e;font-style:normal;font-weight:400;height:18.0pt;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;" height="24"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl112" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl112" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl112" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl112" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl112" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl112" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl112" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl112" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl112" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"></span></td>
+            <td class="xl113" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:right;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"><strong>Total Balance</strong></span></td>
+            <td class="xl113" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:right;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"><strong>$</strong></span></td>
+            <td class="xl114" style="background-color:#d9272e;font-style:normal;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:10pt;"><strong>{{:SaldoTotal}}</strong><span><strong>&nbsp;</strong></span></span></td>
+        </tr>
+        <tr style="height:7.5pt;" height="10">
+            <td style="font-style:normal;font-weight:400;height:7.5pt;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;" height="10"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;"><span style="color:windowtext;font-family:Arial;font-size:10pt;"></span></td>
+            <td class="xl81" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:9pt;"></span></td>
+            <td class="xl81" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-align:left;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:#d9272e;font-family:Arial, sans-serif;font-size:9pt;"></span></td>
+            <td class="xl82" style="font-style:normal;font-weight:400;padding-left:1px;padding-right:1px;padding-top:1px;text-decoration-line:none;text-wrap:nowrap;vertical-align:middle;white-space-collapse:collapse;"><span style="color:white;font-family:Arial, sans-serif;font-size:8pt;"></span></td>
+        </tr>
+        <tr style="height:13.2pt;" height="18">
+            <td class="xl122" style="font-style:normal;height:13.2pt;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;" colspan="13" height="18"><span style="color:windowtext;font-family:Arial, sans-serif;font-size:8pt;"><strong>Su cuenta es de ${{:SaldoTotal}}, favor hacer el pago antes de la fecha de vencimiento</strong></span></td>
+        </tr>
+        <tr style="height:18.0pt;" height="24">
+            <td class="xl123" style="font-style:normal;font-weight:400;height:18.0pt;padding-left:1px;padding-right:1px;padding-top:1px;text-align:center;text-decoration-line:none;text-wrap:nowrap;vertical-align:bottom;white-space-collapse:collapse;" colspan="13" height="24"><span style="color:windowtext;font-family:Arial;font-size:10pt;">10 Calle Poniente Casa #160, San Salvador, El Salvador</span></td>
+        </tr>
+        </tbody>
+        </table>
+    </script>
+}
+
+@section criterios {
+    <div style="padding-left: 1rem; padding-right:1rem">
+        <div style="margin-bottom:10px; margin-top:10px">
+            <select editable=false class="easyui-combogrid" required="required" name="idTarjeta" style="width:100%" data-options="
+                    panelWidth: 500,
+                    idField: 'idTarjeta' ,
+                    textField: 'noTarjeta' ,
+                    url: '/Transacciones/GetTarjetasCredito' ,
+                    method: 'get' ,
+                    columns: [[
+                    {field:'idTarjeta',title:'ID',width:80},
+                    {field:'noTarjeta',title:'No. Tarjeta',width:190},
+                    {field:'tipoTarjeta',title:'Producto',width:120},
+                    {field:'limiteCredito',title:'Limite',width:120,align:'right'}
+                    ]],
+                    fitColumns: true,
+                    label: 'Seleccione una tarjeta:' ,
+                    labelPosition: 'top' ,
+                    onChange : (updated, old)=>
+                {
+                window.EasyUI('#txtIdMovimientos').combobox('reload', '/Transacciones/GetMovimientos?idTarjeta=' + updated);
+                }
+                ">
+            </select>
+        </div>
+        <div class="col-sm-3" style="width:100%">
+            <label for="txtPeriodo">Año: </label>
+            <input name="Periodo" type="text" class="form-control" id="txtPeriodo" placeholder="Periodo" style="border-radius: 0px!important;">
+        </div>
+        <div class="col-sm-3" style="width:100%">
+            <label for="txtMes">Mes: </label>
+            <input name="Mes" type="text" class="form-control" id="txtMes" placeholder="Mes" style="border-radius: 0px!important;">
+        </div>
+        <div style="margin-top:10px">
+            <a href="#" class="easyui-linkbutton" onclick="searchEstadoDeCuenta(); return" data-options="iconCls:'icon-search'" style="width:80px; float:right">Buscar</a>
+        </div>
+    </div>
+}
+
+@section resultados {
+    <div style="margin:20px 0;"></div>
+    <div id="dEstadoCuenta" style="display: flex;justify-content: center;">
+    </div>
+}

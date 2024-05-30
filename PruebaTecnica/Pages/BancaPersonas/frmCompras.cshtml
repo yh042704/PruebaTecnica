@@ -1,0 +1,107 @@
+﻿@page
+@model PruebaTecnica.Pages.BancaPersonas.frmComprasModel
+@{
+    ViewBag.Title = "Realizar una compra";
+    Layout = "_LayoutDetail";
+}
+
+@section scripts {
+    <script type="text/javascript">
+        window.EasyUI(document).ready(() => {
+            window.EasyUI('.easyui-panel').panel();
+            window.EasyUI('.easyui-textbox').textbox();
+            window.EasyUI('.easyui-linkbutton').linkbutton();
+            window.EasyUI('.easyui-datebox').datebox({
+                formatter: (date) => {
+                    let y = date.getFullYear();
+                    let m = date.getMonth() + 1;
+                    let d = date.getDate();
+                    return (d < 10 ? ('0' + d) : d) + '-' + (m < 10 ? ('0' + m) : m) + '-' + y;
+                },
+                parser: (s) => {
+                    if (!s) return new Date();
+                    let ss = s.split('-');
+                    let y = parseInt(ss[2], 10);
+                    let m = parseInt(ss[1], 10);
+                    let d = parseInt(ss[0], 10);
+                    if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+                        return new Date(y, m - 1, d)
+                    } else {
+                        return new Date();
+                    }
+                }
+            });
+            window.EasyUI('.easyui-numberbox').numberbox();
+            window.EasyUI('.easyui-combogrid').combogrid();
+
+            window.EasyUI('#frmCompra').form({
+                iframe: false,
+                success: (data) => {
+                    let datosResult = JSON.parse(data);
+                    if (datosResult.success) {
+                        clearForm();
+                        window.EasyUI.messager.alert('Info', datosResult.message, 'info');
+                    } else {
+                        window.Mensajes.error("Ha ocurrido un error", datosResult.message);
+                    }
+
+                    showBlockUI('#dPanelCompras')
+                }
+            });
+        });
+
+        function submitForm() {
+            showBlockUI('#dPanelCompras', 'Procesando...')
+            window.EasyUI('#frmCompra').form('submit');
+        }
+
+        function clearForm() {
+            window.EasyUI('#frmCompra').form('clear');
+        }
+    </script>
+}
+
+@section sinCriterios {
+}
+
+@section resultados {
+    <div style="margin:20px 0;"></div>
+    <div style="margin: auto;width: 50%;display: flex;justify-content: center;">
+        <div id="dPanelCompras" class="easyui-panel" title="Detalle" style="width:100%;max-width:400px;padding:30px 60px;">
+            <form action="/Transacciones/ProcesarCompra" method="post" enctype="multipart/form-data" id="frmCompra">
+                <div style="margin-bottom:10px">
+                    <select id="txtNoTarjeta" class="easyui-combogrid" name="idTarjeta" style="width:100%" required="required" data-options="
+                                    panelWidth: 500,
+                                    idField: 'idTarjeta',
+                                    textField: 'noTarjeta',
+                                    url: '/Transacciones/GetTarjetasCredito',
+                                    method: 'get',
+                                    columns: [[
+                                            {field:'idTarjeta',title:'ID',width:80},
+                                            {field:'noTarjeta',title:'No. Tarjeta',width:190},
+                                            {field:'tipoTarjeta',title:'Producto',width:120},
+                                            {field:'limiteCredito',title:'Limite',width:120,align:'right'}
+                                    ]],
+                                    fitColumns: true,
+                                    label: 'Seleccione una tarjeta:',
+                                    labelPosition: 'top'
+                                ">
+                    </select>
+                </div>
+                <div style="margin-bottom:10px">
+                    <input class="easyui-textbox" name="Descripcion" labelPosition="top" style="width:100%;height:60px" data-options="label:'Descripción:',multiline:true" required="required">
+                </div>
+                <div style="margin-bottom:10px">
+                    <input class="easyui-datebox" name="Fecha" label="Fecha:" labelPosition="top" style="width:100%;" required="required">
+                </div>
+                <div style="margin-bottom:10px">
+                    <input class="easyui-numberbox" name="Monto" label="Monto:" labelPosition="top" precision="2" style="width:100%;" required="required">
+                </div>
+            </form>
+            <div style="text-align:center;padding:5px 0">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Procesar</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Limpiar</a>
+            </div>
+        </div>
+    </div>
+}

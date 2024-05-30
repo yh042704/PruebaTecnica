@@ -1,0 +1,38 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<table width="95%">
+    <tr>
+        <td width="70%">
+            <div class="easyui-panel" style="padding:5px;font-size: 26px!important; border: 0px!important; padding-left: var(--bs-gutter-x,.75rem)">
+                <a href="#" class="easyui-linkbutton" onclick="moduleHome.LoadPartialView(2, '2,Index', loadSlider); return" data-options="plain:true">Home</a>
+                <a href="#" class="easyui-linkbutton" onclick="moduleHome.LoadPartialView(1, '1,about', this);return" data-options="plain:true">Conócenos</a>
+                <a href="#" class="easyui-linkbutton" onclick="showPopupDialog('DialogContactTemplate'); return" data-options="plain:true">Contáctanos</a>
+                @if (HttpContextAccessor.HttpContext!.Request.Cookies[".PruebaTecnica.Cookies.login"] != null)
+                {
+                    <a href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-man'">Banca Personas</a>
+                    <a href="#" class="easyui-linkbutton" onclick="moduleHome.LogOut();" data-options="plain:true">Salir</a>
+                }
+                @if (HttpContextAccessor.HttpContext!.Request.Cookies[".PruebaTecnica.Cookies.login"] == null)
+                {
+                    <a href="#" class="easyui-linkbutton" onclick="showPopupDialog('DialogLoginTemplate'); return" data-options="plain:true">Login/Registrarse</a>
+                }
+            </div>
+        </td>
+        <td align="right">
+            @if (HttpContextAccessor.HttpContext!.Request.Cookies[".PruebaTecnica.Cookies.login"] != null)
+            {
+                <b>Hola, @(HttpContextAccessor.HttpContext!.Request.Cookies["usuario"])</b>
+            }
+        </td>
+    </tr>
+</table>
+
+@if (HttpContextAccessor.HttpContext!.Request.Cookies[".PruebaTecnica.Cookies.login"] != null)
+{
+    <div id="mm1" style="width:250px;">
+        <div onclick="moduleHome.LoadPartialView(6, '6,BancaPersonas/frmEstadoDeCuenta', this);return">Estado de Cuenta</div>
+        <div onclick="moduleHome.LoadPartialView(5, '5,BancaPersonas/frmTransacciones', this);return">Transacciones</div>
+        <div onclick="moduleHome.LoadPartialView(3, '3,BancaPersonas/frmCompras', this);return">Realizar Compra</div>
+        <div onclick ="moduleHome.LoadPartialView(4, '4,BancaPersonas/frmPagos', this);return"> Realizar Pago</div>
+    </div>
+}

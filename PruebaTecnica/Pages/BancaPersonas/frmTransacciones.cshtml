@@ -1,0 +1,172 @@
+﻿@page
+@model PruebaTecnica.Pages.BancaPersonas.frmTransaccionesModel
+@{
+    ViewBag.Title = "Transacciones";
+    Layout = "_LayoutDetail";
+}
+
+@section scripts {
+    <script type="text/javascript">
+        init();
+
+        function init() {
+            let d = new Date();
+            let periodo = window.EasyUI("#txtPeriodo");
+            let mes = window.EasyUI("#txtMes");
+
+            periodo.datepicker({
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                language: 'es'
+            }).on('changeDate', (e) => {
+                window.EasyUI(this).datepicker('hide');
+            });
+
+            mes.datepicker({
+                format: "MM",
+                viewMode: "months",
+                minViewMode: "months",
+                language: 'es'
+            }).on('changeDate', (e) => {
+                window.EasyUI(this).datepicker('hide');
+            });
+
+            periodo.datepicker('setDate', d);
+            mes.datepicker('setDate', d);
+
+            window.EasyUI('.easyui-combogrid').combogrid();
+            window.EasyUI('.easyui-linkbutton').linkbutton();
+
+            let dg = window.EasyUI('#dgTransacciones');
+            dg.datagrid();
+            dg.datagrid('resize', {
+                height: window.innerHeight - 250
+            });
+        }
+
+        function searchTransacciones() {
+            let formulario = $('#frmCriterios');
+            let parametros = commonData.GetSerializeObj(formulario);
+
+            let mes = window.EasyUI("#txtMes").datepicker('getDate').getMonth()+1;
+            parametros.Mes = mes;
+
+            commonData.GetData('/Transacciones/GetTransacciones', parametros)
+                .then((json) => {
+                    if (json.result.length > 0) {
+                        let totalTransac = json.result.reduce((sum, value) => (sum + value.monto), 0);
+
+                        let dataResult = {
+                            "total": 1,
+                            "rows": json.result,
+                            "footer": [{ 
+                                "name": "Total", 
+                                "monto": totalTransac 
+                            }]
+                        };
+
+                        let dg = window.EasyUI('#dgTransacciones');
+                        dg.datagrid({
+                            fitColumns: true,
+                            showFooter: true,
+                            rownumbers: true,
+                            singleSelect: true,
+                            data: dataResult
+                        });
+
+                        let pager = dg.datagrid('getPager');
+                        pager.pagination({
+                            showPageList: false,
+                            buttons: [{
+                                iconCls: 'far fa-file-excel',
+                                handler: () => {
+                                    dg.datagrid('toExcel', 'dg.xls')
+                                }
+                            },
+                            {
+                                iconCls: 'fas fa-file-csv',
+                                handler: () => {
+                                    dg.datagrid('toCsv', 'dg.csv')
+                                }
+                            },
+                            {
+                                iconCls: 'fas fa-print',
+                                handler: () => {
+                                    dg.datagrid('print', 'DataGrid')
+                                }
+                            }]
+                        });
+                    } else {
+                        let dataResult = {
+                            "total": 1,
+                            "rows": [],
+                            "footer": [{
+                                "name": "Total",
+                                "monto": 0
+                            }]
+                        };
+
+                        window.EasyUI('#dgTransacciones').datagrid({
+                            data: dataResult
+                        });
+                    }
+                })
+                .catch((error) => {
+                    Mensajes.error("Error", error.message);
+                });
+        }
+    </script>
+}
+
+@section criterios {
+    <div style="padding-left: 1rem; padding-right:1rem">
+        <div style="margin-bottom:10px; margin-top:10px">
+            <select editable=false class="easyui-combogrid" required="required" name="idTarjeta" style="width:100%" data-options="
+                                            panelWidth: 500,
+                                            idField: 'idTarjeta',
+                                            textField: 'noTarjeta',
+                                            url: '/Transacciones/GetTarjetasCredito',
+                                            method: 'get',
+                                            columns: [[
+                                                    {field:'idTarjeta',title:'ID',width:80},
+                                                    {field:'noTarjeta',title:'No. Tarjeta',width:190},
+                                                    {field:'tipoTarjeta',title:'Producto',width:120},
+                                                    {field:'limiteCredito',title:'Limite',width:120,align:'right'}
+                                            ]],
+                                            fitColumns: true,
+                                            label: 'Seleccione una tarjeta:',
+                                            labelPosition: 'top'
+                                        ">
+            </select>
+        </div>
+        <div class="col-sm-3" style="width:100%">
+            <label for="txtPeriodo">Año: </label>
+            <input name="Periodo" type="text" class="form-control" id="txtPeriodo" placeholder="Periodo" style="border-radius: 0px!important;">
+        </div>
+        <div class="col-sm-3" style="width:100%">
+            <label for="txtMes">Mes: </label>
+            <input name="Mes" type="text" class="form-control" id="txtMes" placeholder="Mes" style="border-radius: 0px!important;">
+        </div>
+        <div style="margin-top:10px">
+            <a href="#" class="easyui-linkbutton" onclick="searchTransacciones(); return" data-options="iconCls:'icon-search'" style="width:80px; float:right">Buscar</a>
+        </div>
+    </div>
+}
+
+@section resultados {
+    <div style="padding-left: 1rem; padding-right:1rem">
+        <div style="margin-top:10px"></div>
+        <table id="dgTransacciones" title="" style="width:100%;height:250px"
+               data-options="rownumbers:true,singleSelect:true,pagination:true">
+            <thead>
+                <tr>
+                    <th data-options="field:'tipoMovimiento'" width="15%">Tipo Mov.</th>
+                    <th data-options="field:'fecha'" width="15%">Fecha</th>
+                    <th data-options="field:'descripcion'" width="50%">Descripción</th>
+                    <th data-options="field:'monto',align:'right'" width="20%">Monto</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+}

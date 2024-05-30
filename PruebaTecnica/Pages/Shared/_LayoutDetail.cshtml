@@ -1,0 +1,36 @@
+﻿<div class="header-w3l"></div>
+<div style="margin:15px 0;"></div>
+<script type="text/javascript">
+    window.EasyUI(document).ready(() => {
+        window.EasyUI('#lyPrincipal').layout();        
+        setHeight();
+
+        function setHeight() {
+            let c = window.EasyUI('#lyPrincipal');
+            c.layout('resize', {
+                height: window.innerHeight - 200
+            });
+        }
+    });
+</script>
+
+@RenderSection("scripts", required: false)
+@RenderBody()
+
+<div style="width:100%;padding-right:1rem; padding-left: 1rem">
+    <div id="lyPrincipal" class="easyui-layout" style="width:100%;height:70vh">
+        @RenderSection("sinCriterios", required: false)
+        @if (!IsSectionDefined("sinCriterios"))
+        {
+            <div id="p" data-options="region:'west'" title="Criterios" style="width:300px">
+                <form id="frmCriterios">
+                    @RenderSection("criterios", required: false)
+                </form>
+            </div>
+        }
+        <div data-options="region:'center'" title="@ViewBag.Title">
+            @RenderSection("resultados", required: true)
+        </div>
+    </div>
+</div>
+
