@@ -1,0 +1,307 @@
+{
+	"info": {
+		"_postman_id": "627d138b-2be8-4478-954a-1a90c0a1b6bd",
+		"name": "PruebaTecnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35357838"
+	},
+	"item": [
+		{
+			"name": "https://localhost:7036/api/Home/EnviarContactos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    Correo: 'yh042704@gmail.com',\r\n    Nombre: 'Yesenia Hernandez',\r\n    Message: 'Probando enviar mensaje desde postman'\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7036/api/Home/EnviarContactos",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7036",
+					"path": [
+						"api",
+						"Home",
+						"EnviarContactos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7036/api/Usuarios/RegistrarUsuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    usuario: 'Gabriel@gmail.com',\r\n    nombre: 'Gabriel',\r\n    direccion: 'Malaga',\r\n    noDocumento: '10360052-4',\r\n    password: '123'\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7036/api/Usuarios/RegistrarUsuario",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7036",
+					"path": [
+						"api",
+						"Usuarios",
+						"RegistrarUsuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7036/api/Login/Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    usuario: 'yesenia@pruebatecnica.com.sv',\r\n    password: '123'\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7036/api/Login/Login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7036",
+					"path": [
+						"api",
+						"Login",
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7036/api/Transacciones/GetTarjetasCredito?userAuth=4",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Inllc2VuaWFAcHJ1ZWJhdGVjbmljYS5jb20uc3YiLCJuYmYiOjE3MTcwMzcxMDQsImV4cCI6MTcxNzA4MDMwNCwiaWF0IjoxNzE3MDM3MTA0fQ.8SZyscCpzVRYS1y6W0vhV6VD0ztp6v7innkWgLqBCi0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7036/api/Transacciones/GetTarjetasCredito?userAuth=4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7036",
+					"path": [
+						"api",
+						"Transacciones",
+						"GetTarjetasCredito"
+					],
+					"query": [
+						{
+							"key": "userAuth",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7036/api/Transacciones/GetTransacciones?idTarjeta=1&Periodo=2024&Mes=5",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Inllc2VuaWFAcHJ1ZWJhdGVjbmljYS5jb20uc3YiLCJuYmYiOjE3MTcwMzcxMDQsImV4cCI6MTcxNzA4MDMwNCwiaWF0IjoxNzE3MDM3MTA0fQ.8SZyscCpzVRYS1y6W0vhV6VD0ztp6v7innkWgLqBCi0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7036/api/Transacciones/GetTransacciones?idTarjeta=1&Periodo=2024&Mes=5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7036",
+					"path": [
+						"api",
+						"Transacciones",
+						"GetTransacciones"
+					],
+					"query": [
+						{
+							"key": "idTarjeta",
+							"value": "1"
+						},
+						{
+							"key": "Periodo",
+							"value": "2024"
+						},
+						{
+							"key": "Mes",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7036/api/Transacciones/GetEstadoCuenta?idTarjeta=4&Periodo=2024&Mes=5",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Inllc2VuaWFAcHJ1ZWJhdGVjbmljYS5jb20uc3YiLCJuYmYiOjE3MTcwMzcxMDQsImV4cCI6MTcxNzA4MDMwNCwiaWF0IjoxNzE3MDM3MTA0fQ.8SZyscCpzVRYS1y6W0vhV6VD0ztp6v7innkWgLqBCi0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7036/api/Transacciones/GetEstadoCuenta?idTarjeta=4&Periodo=2024&Mes=5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7036",
+					"path": [
+						"api",
+						"Transacciones",
+						"GetEstadoCuenta"
+					],
+					"query": [
+						{
+							"key": "idTarjeta",
+							"value": "4"
+						},
+						{
+							"key": "Periodo",
+							"value": "2024"
+						},
+						{
+							"key": "Mes",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7036/api/Transacciones/ProcesarCompra",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Inllc2VuaWFAcHJ1ZWJhdGVjbmljYS5jb20uc3YiLCJuYmYiOjE3MTcwMzcxMDQsImV4cCI6MTcxNzA4MDMwNCwiaWF0IjoxNzE3MDM3MTA0fQ.8SZyscCpzVRYS1y6W0vhV6VD0ztp6v7innkWgLqBCi0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   idTarjeta: 1,\r\n   Descripcion: 'Ben´s Coffe',\r\n   Fecha: '20240510',\r\n   Monto: 20.00 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7036/api/Transacciones/ProcesarCompra",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7036",
+					"path": [
+						"api",
+						"Transacciones",
+						"ProcesarCompra"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7036/api/Transacciones/ProcesarPago",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Inllc2VuaWFAcHJ1ZWJhdGVjbmljYS5jb20uc3YiLCJuYmYiOjE3MTcwMzcxMDQsImV4cCI6MTcxNzA4MDMwNCwiaWF0IjoxNzE3MDM3MTA0fQ.8SZyscCpzVRYS1y6W0vhV6VD0ztp6v7innkWgLqBCi0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   idTarjeta: 1,\r\n   Descripcion: 'Pago Tarjeta de Credito',\r\n   Fecha: '20240510',\r\n   Monto: 22.50 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7036/api/Transacciones/ProcesarPago",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7036",
+					"path": [
+						"api",
+						"Transacciones",
+						"ProcesarPago"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
